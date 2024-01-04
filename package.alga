@@ -1,0 +1,3 @@
+@import './src/alga/tedirAlert.alga';
+
+@export tedirAlert;

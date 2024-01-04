@@ -1,0 +1,9 @@
+@define refs {
+  name: tedirAlert;
+}
+
+@alga {refs.name} {
+  .{refs.name} {
+    ref: width-240px;
+  }
+}
