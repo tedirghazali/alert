@@ -7,7 +7,7 @@ import AlertNotification from './components/AlertNotification.vue'
 const alert = ref<boolean>(true)
 const alerts = ref<any[]>([])
 const alertHandler = () => {
-  alerts.value.push({
+  alerts.value.unshift({
     title: 'Test Title',
     description: 'Test Description',
     variant: array.shuffle(['success', 'info', 'warning', 'error'])[0]
@@ -27,7 +27,7 @@ const alertHandler = () => {
     <button type="button" class="button my-5" @click="alertHandler">Add Notification</button>
   </div>
   <Teleport to="body">
-    <AlertNotification v-model="alerts" />
+    <AlertNotification v-model="alerts" transition="fade" :duration="7500" />
   </Teleport>
 </template>
 
@@ -35,5 +35,23 @@ const alertHandler = () => {
 @use container;
 @use form {
   field: button;
+}
+
+.list-move, /* apply transition to moving elements */
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.list-leave-active {
+  position: absolute;
 }
 </style>
